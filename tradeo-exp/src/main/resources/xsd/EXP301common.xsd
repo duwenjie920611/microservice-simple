@@ -1,0 +1,1302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by YYC (EMBRACE) -->
+<xs:schema xmlns:exp="http://www.chinaport.gov.cn/Exp" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.chinaport.gov.cn/Exp" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="common.xsd"/>
+	<xs:element name="EXP301">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="EntryHead">
+					<xs:annotation>
+						<xs:documentation>报关单表头信息</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="OpType">
+								<xs:annotation>
+									<xs:documentation>操作类型
+ADD 新增表头、表体
+MOD 修改表头、表体
+APP 追加表体、修改表头
+一期暂时只支持“ADD”功能</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:length value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="PreEntryId">
+								<xs:annotation>
+									<xs:documentation>数据中心统一编号
+对于首次申报，该号码为空
+对于追加，该号码记录数据中心统一编号</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="18"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="EntryId">
+								<xs:annotation>
+									<xs:documentation>海关编号：关区号（4位）+
+年份（4位）+进出口标志（1位,0-出口1-进口）+
+原报关单编号（9位）
+</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="18"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="IEFlag">
+								<xs:annotation>
+									<xs:documentation>进出口标志                                 ”I”-进口，
+”E”-出口
+
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="IEPort">
+								<xs:annotation>
+									<xs:documentation>进出口岸代码
+第一运输工具申报进境口岸。
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="4"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="IEDate" type="exp:yyyyMMdd">
+								<xs:annotation>
+									<xs:documentation>进出口日期(YYYYMMDD)
+第一运输工具申报进境日期
+
+必填,与对应舱单进出口日期一致</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="DDate" type="exp:yyyyMMddHHmmss">
+								<xs:annotation>
+									<xs:documentation>申报时间(YYYYMMDDHHMMSS)
+必填</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="DestinationPort">
+								<xs:annotation>
+									<xs:documentation>指运港(抵运港)
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="4"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TrafName">
+								<xs:annotation>
+									<xs:documentation>运输工具名称.                          为配合二乘舱单处理设计，转关货物报关时需要在船名处填写转关运输申报单编号以及一乘舱单船名，具体格式为：@+转关单号/船名（一乘舱单）
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="VoyageNo">
+								<xs:annotation>
+									<xs:documentation>运输工具航次(班)号
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="32"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TrafMode">
+								<xs:annotation>
+									<xs:documentation>运输方式代码
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TradeCo">
+								<xs:annotation>
+									<xs:documentation>收发货人编号
+AB类必为空
+CD类必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="10"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TradeName">
+								<xs:annotation>
+									<xs:documentation>收发货人名称
+AB类必为空
+CD类必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="DistrictCode">
+								<xs:annotation>
+									<xs:documentation>货主单位地区代码
+选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="5"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OwnerCode">
+								<xs:annotation>
+									<xs:documentation>货主单位代码
+选填
+</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="10"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OwnerName">
+								<xs:annotation>
+									<xs:documentation>货主单位名称
+
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="AgentType">
+								<xs:annotation>
+									<xs:documentation>申报单位类别
+0:企业；1：自然人
+A、C、D类必须为企业。
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="AgentCode">
+								<xs:annotation>
+									<xs:documentation>申报单位代码
+AgentType=0时必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="10"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="AgentName">
+								<xs:annotation>
+									<xs:documentation>申报单位名称
+AgentType=0时必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ContrNo">
+								<xs:annotation>
+									<xs:documentation>合同号
+选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="32"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="BillNo">
+								<xs:annotation>
+									<xs:documentation>总运单号
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="32"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="AssBillNo">
+								<xs:annotation>
+									<xs:documentation>分运单号
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="32"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TradeCountry">
+								<xs:annotation>
+									<xs:documentation>贸易国别(起/抵运地)
+必填 进口及出口报关单，禁止录入“中国”的参数代码</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TradeMode">
+								<xs:annotation>
+									<xs:documentation>监管方式
+CD必填，必须是0110,3010,3039
+
+A、B必不填
+</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="4"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="CutMode">
+								<xs:annotation>
+									<xs:documentation>征免性质分类
+C、D必填，只允许为101
+
+A、b必不填
+</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TransMode">
+								<xs:annotation>
+									<xs:documentation>成交方式
+A、C、D必填
+B必不填
+</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="FeeMark">
+								<xs:annotation>
+									<xs:documentation>运费标记                                    
+1代表率
+2代表单价
+3代表总价
+
+进口fob运保费必填，cif运保费必不填；cf保费必填、运费必不填；ci 运费必填、保费必不填
+；市场价，运费保费均选填
+出口相反
+
+B类进出口，均不填写运保费
+</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="FeeCurr">
+								<xs:annotation>
+									<xs:documentation>运费币制
+运费标记为2、3时必填，其他必不填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="FeeRate">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 5)
+运费/率                                          原来：
+如果fee_mark=1该字段*10000存储代表百分数;
+如果fee_mark=2该字段*100存储代表单价,
+如果fee_mark=3该字段为总价，存原值
+
+
+
+进口fob运保费必填，cif运保费必不填；cf保费必填、运费必不填；ci 运费必填、保费必不填
+；市场价，运费保费均选填
+出口相反
+
+B类进出口，均不填写运保费</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="InsurMark">
+								<xs:annotation>
+									<xs:documentation>保险费标记                                    说明:                                               1代表率
+2代表单价
+3代表总价
+
+进口fob运保费必填，cif运保费必不填，cf保费必填、运费必不填。
+出口相反
+B类进出口，均不填写运保费</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="InsurCurr">
+								<xs:annotation>
+									<xs:documentation>保险费币制
+保费标记为2、3时必填，其他必不填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="InsurRate">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 5)
+保险费/率                                      说明:                                               1代表率
+2代表单价
+3代表总价
+
+进口fob运保费必填，cif运保费必不填，cf保费必填、运费必不填。
+出口相反
+B类进出口，均不填写运保费</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OtherMark">
+								<xs:annotation>
+									<xs:documentation>杂费标记                                        
+选填，A、C类报关单选填，B类必不填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OtherCurr">
+								<xs:annotation>
+									<xs:documentation>杂费币制
+杂费标记为2时必填，其他选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OtherRate">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 5)
+杂费/率                                           1代表率
+2代表单价
+3代表总价
+
+选填，杂费标记存在时必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="PackNo">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 0)
+件数
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="19"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="GrossWt">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 5)
+毛重                                               单位为公斤
+
+必填，必须大于等于净重</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="NetWt">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 5)
+净重                                               单位为公斤
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="WrapType">
+								<xs:annotation>
+									<xs:documentation>包装种类
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="32"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="NoteS">
+								<xs:annotation>
+									<xs:documentation>备注
+选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="2000"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="DeclPort">
+								<xs:annotation>
+									<xs:documentation>申报口岸代码
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="4"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="CoOwner">
+								<xs:annotation>
+									<xs:documentation>经营单位性质                                 说明:经营单位编码的第6位
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="RelativeId">
+								<xs:annotation>
+									<xs:documentation>关联编号字段(转出的手册、转入、转出的报关单)
+选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="18"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="InputNo">
+								<xs:annotation>
+									<xs:documentation>录入人
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="32"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="InputCompanyCo">
+								<xs:annotation>
+									<xs:documentation>录入单位代码
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="10"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="InputCompanyName">
+								<xs:annotation>
+									<xs:documentation>录入单位名称
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="DeclareNo">
+								<xs:annotation>
+									<xs:documentation>报关员代码
+如果AgentType=1，必不填，
+否则必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="32"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="CustomsField">
+								<xs:annotation>
+									<xs:documentation>码头/货场代码（为物流监控备用）
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="8"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="KjId">
+								<xs:annotation>
+									<xs:documentation>KJ编号
+选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="18"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="SendName">
+								<xs:annotation>
+									<xs:documentation>发件人
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="50"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ReceiveName">
+								<xs:annotation>
+									<xs:documentation>收件人
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="50"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="SendCountry">
+								<xs:annotation>
+									<xs:documentation>发件人国别
+必填，出口默认为“中国”且不可修改，进口禁止录入“中国”的参数代码</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="SendCity">
+								<xs:annotation>
+									<xs:documentation>发件人城市
+出口必填，仅限中文。进口选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="50"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="SendId">
+								<xs:annotation>
+									<xs:documentation>收发件人证件号码                      说明:B类使用，进口收件人；出口填发件人
+B类必填，A、C、D类选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TotalValue">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 4)
+价值
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="CurrCode">
+								<xs:annotation>
+									<xs:documentation>币制
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="MainGName">
+								<xs:annotation>
+									<xs:documentation>主要商品名称
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="EntryType">
+								<xs:annotation>
+									<xs:documentation>报关类别
+A、
+B、
+C、
+D</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="SendIdType">
+								<xs:annotation>
+									<xs:documentation>收发件人证件类型
+1 身份证
+2 护照
+3 其他
+
+B类必填，A、C、D类必不填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TradeScc">
+								<xs:annotation>
+									<xs:documentation>收发货人统一社会信用代码
+A、B类必为空，C、D类选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="18"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OwnerScc">
+								<xs:annotation>
+									<xs:documentation>货主单位统一社会信用代码，选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="18"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="AgentScc">
+								<xs:annotation>
+									<xs:documentation>申报单位统一社会信用代码
+选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="18"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="SendAddress">
+								<xs:annotation>
+									<xs:documentation>发件人地址
+出口必填，进口起运地为港、澳、台的地区必填。只填写区县、街道级别及以下详细地址。</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="SendTelNo">
+								<xs:annotation>
+									<xs:documentation>发件人号码
+必填
+仅能填写阿拉伯数字、“-”（短横线）、“∣”3种字符，均为半角字符。“-”（短横线）用于区号-座机号-分机号的分隔；“∣”用于两个不同号码之间的分隔。</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="64"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ReceiveAddress">
+								<xs:annotation>
+									<xs:documentation>收件人地址
+进口必填，出口抵运地为港、澳、台地区的必填。只填写区县、街道级别及以下详细地址。</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ReceiveTelNo">
+								<xs:annotation>
+									<xs:documentation>收件人号码
+必填
+仅能填写阿拉伯数字、“-”（短横线）、“∣”3种字符，均为半角字符。“-”（短横线）用于区号-座机号-分机号的分隔；“∣”用于两个不同号码之间的分隔。</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="64"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ReceiveCountry">
+								<xs:annotation>
+									<xs:documentation>收件人国别                          必填，进口默认为“中国”且不可修改，出口禁止录入“中国”的参数代码</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ReceiveCity">
+								<xs:annotation>
+									<xs:documentation>收件人城市                     必填，且该字段必须含有中文，可以包含数字和字母</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="50"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="StopCityEn">
+								<xs:annotation>
+									<xs:documentation>英文经停城市                进口必填，仅限英文及符号，没有填“n”或“N”</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="512"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="SendNameEn">
+								<xs:annotation>
+									<xs:documentation>英文发件人                   进口必填，必须包含英文或拼音，可包含符号。出口选填。</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="50"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="SendAddressEn">
+								<xs:annotation>
+									<xs:documentation>英文发件人地址               进口为非港、澳、台地区的必填，仅限英文、符号、数字。只填写区县、街道级别及以下详细地址</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="SendCityEn">
+								<xs:annotation>
+									<xs:documentation>英文发件人城市            进口必填，必须包含英文或拼音，可包含符号。出口选填。</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="50"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ReceiveNameEn">
+								<xs:annotation>
+									<xs:documentation>英文收件人                        出口必填，仅限英文、符号及数字</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="50"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ReceiveAddressEn">
+								<xs:annotation>
+									<xs:documentation>英文收件人地址                         出口抵运地为非港、澳、台地区的必填，仅限英文、符号、数字。只填写区县、街道级别及以下详细地址。</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="WoodWrap">
+								<xs:annotation>
+									<xs:documentation>是否含木质包装            必填
+0：不含；  1：含有</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="MainGNameEn">
+								<xs:annotation>
+									<xs:documentation>主要货物英文名称         进口必填，仅限英文、符号和数字。必须为表体中成交总价（trade_total）最大的商品名称，若多条表体成交总价一致，取g_no最小的表体对应商品名称。</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="GoodsUsed">
+								<xs:annotation>
+									<xs:documentation>是否为旧物品                必填
+0：否；  1：是</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="LowTempTrans">
+								<xs:annotation>
+									<xs:documentation>是否为低温运输               必填
+0：否；  1：是；</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="EntryList" minOccurs="0" maxOccurs="20">
+					<xs:annotation>
+						<xs:documentation>报关单表体信息</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="OpType">
+								<xs:annotation>
+									<xs:documentation>操作类型
+ADD 新增表头、表体
+MOD 修改表头、表体
+APP 追加表体、修改表头
+一期只允许为“ADD”</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="GNo">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 0)
+序号，对同一个报关单从1开始递增
+
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="19"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="CodeTS">
+								<xs:annotation>
+									<xs:documentation>商品编号（行邮税号）
+B、C、D类必填，A类必不填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="16"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="GName">
+								<xs:annotation>
+									<xs:documentation>商品名称(B类叫:物品名称)
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="GModel">
+								<xs:annotation>
+									<xs:documentation>商品规格、型号
+必填，规范申报时，各规范要素之间以“|”分隔</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OriginCountry">
+								<xs:annotation>
+									<xs:documentation>产销国
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TradeCurr">
+								<xs:annotation>
+									<xs:documentation>成交币制
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="TradeTotal">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 4)
+成交总价，与申报总价相等
+
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="DeclPrice">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 5)
+申报单价
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="DeclTotal">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 4)
+申报总价
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="UseTo">
+								<xs:annotation>
+									<xs:documentation>用途
+选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="2"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="DutyMode">
+								<xs:annotation>
+									<xs:documentation>征减免税方式
+A、B必不填，
+CD必填，只允许为1</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="GQty">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 5)
+申报数量
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="GUnit">
+								<xs:annotation>
+									<xs:documentation>申报计量单位
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Qty1">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 5)
+第一(法定)数量
+A类选填
+BCD类
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Unit1">
+								<xs:annotation>
+									<xs:documentation>第一(法定)计量单位
+A类选填
+BCD类
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Qty2">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 5)
+第二数量
+选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Unit2">
+								<xs:annotation>
+									<xs:documentation>第二计量单位
+选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="GGrossWt">
+								<xs:annotation>
+									<xs:documentation>DECIMAL(19, 5)
+商品毛重字段
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="MName">
+								<xs:annotation>
+									<xs:documentation>生产厂商   选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OriginCity">
+								<xs:annotation>
+									<xs:documentation>产销城市     选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="50"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="GNameEn">
+								<xs:annotation>
+									<xs:documentation>英文商品名称                进口必填，仅限英文、符号和数字。</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Backup1">
+								<xs:annotation>
+									<xs:documentation>备用字段1                          选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Backup2">
+								<xs:annotation>
+									<xs:documentation>备用字段2                          选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Backup3">
+								<xs:annotation>
+									<xs:documentation>备用字段3                          选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Backup4">
+								<xs:annotation>
+									<xs:documentation>备用字段4                          选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Backup5">
+								<xs:annotation>
+									<xs:documentation>备用字段5                          选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="EntryDocu" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="OpType">
+								<xs:annotation>
+									<xs:documentation>操作类型
+ADD 新增表头、表体
+MOD 修改表头、表体
+APP 追加表体、修改表头
+一期只允许为“ADD”</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OrderNo">
+								<xs:annotation>
+									<xs:documentation>序号
+必填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="19"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="DocuCode">
+								<xs:annotation>
+									<xs:documentation>随附单证类型
+选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="CertCode">
+								<xs:annotation>
+									<xs:documentation>随附单证号码
+选填</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="32"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

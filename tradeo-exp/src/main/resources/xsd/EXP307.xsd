@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by YYC (EMBRACE) -->
+<xs:schema xmlns:exp="http://www.chinaport.gov.cn/Exp" xmlns:xs="http://www.w3.org/2001/XMLSchema"  elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="common.xsd"/>
+		<xs:import namespace="http://www.chinaport.gov.cn/Exp" schemaLocation="EXP307common.xsd"/>
+	<xs:element name="Package">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="EnvelopInfo"/>
+				<xs:element name="DataInfo">
+					<xs:annotation>
+						<xs:documentation>业务内容</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="SignedData">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:sequence>
+											<xs:element name="HashSign" type="xs:string"/>
+											<xs:element name="SignerInfo" type="xs:string"/>
+										</xs:sequence>
+										<xs:element name="Data">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="exp:EXP307"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence> 
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+</xs:schema>

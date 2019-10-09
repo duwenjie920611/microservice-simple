@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by liuyu (EMBRACE) -->
+<xs:schema xmlns:exp="http://www.chinaport.gov.cn/exp" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.chinaport.gov.cn/exp" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="common.xsd"/>
+	<xs:element name="Package">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="exp:EnvelopInfo"/>
+				<xs:element name="DataInfo">
+					<xs:annotation>
+						<xs:documentation>业务内容</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="SignedData">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Data">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="EXP312">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="ExpMftHead">
+																	<xs:annotation>
+																		<xs:documentation>快件舱单回执表头信息</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="BillNo">
+																				<xs:annotation>
+																					<xs:documentation>总运单号
+必填</xs:documentation>
+																				</xs:annotation>
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string">
+																						<xs:maxLength value="32"/>
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:element>
+																			<xs:element name="VoyageNo">
+																				<xs:annotation>
+																					<xs:documentation>运输工具航次(班)号
+必填</xs:documentation>
+																				</xs:annotation>
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string">
+																						<xs:maxLength value="15"/>
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:element>
+																			<xs:element name="EntryDate">
+																				<xs:annotation>
+																					<xs:documentation>入库时间
+
+必填</xs:documentation>
+																				</xs:annotation>
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string"/>
+																				</xs:simpleType>
+																			</xs:element>
+																			<xs:element name="RtnFlag">
+																				<xs:annotation>
+																					<xs:documentation>回执结果                   
+必填                               NN：海关入库失败
+NY：海关入库成功         DN：数据中心入库失败
+DY：数据中心入库成功
+</xs:documentation>
+																				</xs:annotation>
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string">
+																						<xs:maxLength value="2"/>
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:element>
+																			<xs:element name="Notes">
+																				<xs:annotation>
+																					<xs:documentation>备注                 </xs:documentation>
+																				</xs:annotation>
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string">
+																						<xs:maxLength value="30"/>
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:element>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="ExpMftList" minOccurs="0" maxOccurs="unbounded">
+																	<xs:annotation>
+																		<xs:documentation>快件舱单回执表体信息</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="BillNo">
+																				<xs:annotation>
+																					<xs:documentation>总运单号
+必填</xs:documentation>
+																				</xs:annotation>
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string">
+																						<xs:maxLength value="32"/>
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:element>
+																			<xs:element name="AssBillNo">
+																				<xs:annotation>
+																					<xs:documentation>分运单号
+必填</xs:documentation>
+																				</xs:annotation>
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string">
+																						<xs:maxLength value="32"/>
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:element>
+																			<xs:element name="EntryDate">
+																				<xs:annotation>
+																					<xs:documentation>入库时间
+必填</xs:documentation>
+																				</xs:annotation>
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string"/>
+																				</xs:simpleType>
+																			</xs:element>
+																			<xs:element name="RtnFlag">
+																				<xs:annotation>
+																					<xs:documentation>回执结果                   
+必填                               NN：海关入库失败
+NY：海关入库成功   </xs:documentation>
+																				</xs:annotation>
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string">
+																						<xs:maxLength value="2"/>
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:element>
+																			<xs:element name="Notes">
+																				<xs:annotation>
+																					<xs:documentation>备注                 </xs:documentation>
+																				</xs:annotation>
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string">
+																						<xs:maxLength value="30"/>
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:element>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:sequence>
+											<xs:element name="HashSign" type="xs:string"/>
+											<xs:element name="SignerInfo" type="xs:string"/>
+										</xs:sequence>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

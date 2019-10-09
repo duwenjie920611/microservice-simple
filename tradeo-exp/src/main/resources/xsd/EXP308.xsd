@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by YYC (EMBRACE) -->
+<xs:schema xmlns:exp="http://www.chinaport.gov.cn/exp" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.chinaport.gov.cn/exp" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="common.xsd"/>
+	<xs:element name="Package">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="exp:EnvelopInfo"/>
+				<xs:element name="DataInfo">
+					<xs:annotation>
+						<xs:documentation>业务内容</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="SignedData">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Data">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="exp:EXP308"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:sequence>
+											<xs:element name="HashSign" type="xs:string"/>
+											<xs:element name="SignerInfo" type="xs:string"/>
+										</xs:sequence>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EXP308">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AgentCode">
+					<xs:annotation>
+						<xs:documentation>快件运营人编码</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="10"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="TradeCode">
+					<xs:annotation>
+						<xs:documentation>收发货人单位编码</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="10"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="BeginDate" type="exp:yyyyMMdd">
+					<xs:annotation>
+						<xs:documentation>委托协议开始日期</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="EndDate" type="exp:yyyyMMdd">
+					<xs:annotation>
+						<xs:documentation>结束日期</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="CustomsCode">
+					<xs:annotation>
+						<xs:documentation>关区代码</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="4"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="OpTime" type="exp:yyyyMMddHHmmss">
+					<xs:annotation>
+						<xs:documentation>操作时间</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="OpResult">
+					<xs:annotation>
+						<xs:documentation>D0 中心入库成功
+D1 中心入库失败
+D2发往海关成功
+D3发往海关失败
+Y 海关入库成功
+N  海关入库失败
+0 海关审批通过
+1 海关审批不通过
+2 海关提前退回</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="1"/>
+							<xs:maxLength value="2"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Notes">
+					<xs:annotation>
+						<xs:documentation>备注
+提前终止时的结束日期</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="1024"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="AgentScc">
+					<xs:annotation>
+						<xs:documentation>申报单位统一社会信用代码</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="18"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="TradeScc">
+					<xs:annotation>
+						<xs:documentation>收发货人统一社会信用代码</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="18"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

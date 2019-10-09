@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by YYC (EMBRACE) -->
+<xs:schema xmlns:exp="http://www.chinaport.gov.cn/exp" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.chinaport.gov.cn/exp" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="common.xsd"/>
+	<xs:element name="Package">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="exp:EnvelopInfo"/>
+				<xs:element name="DataInfo">
+					<xs:annotation>
+						<xs:documentation>业务内容</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="SignedData">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Data">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="exp:EXP302"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:sequence>
+											<xs:element name="HashSign" type="xs:string"/>
+											<xs:element name="SignerInfo" type="xs:string"/>
+										</xs:sequence>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EXP302">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="EntryHead">
+					<xs:annotation>
+						<xs:documentation>报关单表头信息</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="PreEntryId">
+								<xs:annotation>
+									<xs:documentation>报关单数据中心统一编号</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="18"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OpType">
+								<xs:annotation>
+									<xs:documentation>操作类型
+ADD 新增表头、表体
+MOD 修改表头、表体
+APP 追加表体、修改表头</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="BillNo">
+								<xs:annotation>
+									<xs:documentation>总运单号
+</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="32"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="AssBillNo">
+								<xs:annotation>
+									<xs:documentation>分运单号</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="32"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="IEFlag">
+								<xs:annotation>
+									<xs:documentation>进出口标志
+</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="EntryId">
+								<xs:annotation>
+									<xs:documentation>报关单号</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="18"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="OpTime" type="exp:yyyyMMddHHmmsszzz">
+								<xs:annotation>
+									<xs:documentation>操作时间</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="OpResult">
+								<xs:annotation>
+									<xs:documentation>回执状态
+D0 中心入库成功
+D1 中心入库失败
+D2发往海关成功
+D3发往海关失败
+Y 新增、修改、追加成功
+N 新增、修改、追加失败
+A 允许追加
+R 不允许追加
+00     退单
+02     转普货报关
+03     转人工审核
+04     请提交纸面单据
+05     查验
+06     扣留
+07     没收
+08     改单
+D     删单
+10     审核通过
+11     放行
+12    查验后补税放行
+13    查验后补证放行
+14    查验后补税补证放行
+15    查验后处罚后放
+16    查验后改单放行
+17    查验后担保放行
+18     查验正常货物放行
+19     其他待处理
+20     退单重报
+21     查验后转普货报关
+22     查验后转A、C类报关
+23     查验后转个人物品报关
+24     查验后改单
+30	   整改合格放行
+31	   检疫处理合格放行
+32	   查验后退运 
+33	   处罚退运
+34	   检疫处理退运
+35     处罚后检疫处理退运
+36	   处罚销毁
+37	   查验后销毁
+38	   检疫处理销毁
+39     处罚后检疫处理销毁
+40	   查验后整改
+41	   检疫处理
+42  处罚后检疫处理合格放行
+43	   企业申请退单 
+44	   放弃物品退单 </xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:minLength value="1"/>
+										<xs:maxLength value="2"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Notes">
+								<xs:annotation>
+									<xs:documentation>备注</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="4096"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

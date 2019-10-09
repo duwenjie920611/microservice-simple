@@ -1,0 +1,16 @@
+
+
+
+
+server:
+  port: 1040
+
+
+spring:
+  application:
+    name: microservice-simple-eureka-clinet-1040
+eureka:
+  client:
+    service-url:
+    ##默认以/eureka/结尾
+      defaultZone:  http://http://192.168.99.100:1236/simple/eureka/

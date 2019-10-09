@@ -1,0 +1,38 @@
+
+server:
+  port: 1030
+  servlet:
+    context-path: /simple
+    
+spring:
+  devtools:
+    restart:
+      enabled: true
+  application:
+    name: microservice-simple-eureka-server-1030  
+
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+  #是否注册到其他eureka server 实例中
+    register-with-eureka: false 
+    #是否从其他eureka server 实例中获取数据
+    fetch-registry: false 
+    service-url:
+      defaultZone:  http://${eureka.instance.hostname}:${server.port}/simple/eureka/
+    #enabled: false
+    
+    
+      
+  #instance:
+   #appname: microservice-simple-eureka-server-1030
+   #non-secure-port-enabled: false 开启ssl
+   #secure-port-enabled: true
+
+    #status-page-url: https://${eureka.hostname}/info
+    #status-page-url-path: ${spring.mvc.servlet.path}/info
+
+      
+      
